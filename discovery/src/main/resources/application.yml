@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: discovery
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  jmx:
+    enabled: false
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:3300/postgres
+    username: postgres
+    password: root
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+
+
