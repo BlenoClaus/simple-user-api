@@ -1,4 +1,4 @@
-package br.com.registration;
+package br.com.registration.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

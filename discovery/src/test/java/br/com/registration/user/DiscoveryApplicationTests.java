@@ -1,4 +1,4 @@
-package br.com.registration;
+package br.com.registration.user;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
