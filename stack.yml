@@ -1,0 +1,15 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 3300:5432
+    environment:
+      POSTGRES_PASSWORD: root
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 3000:8080
