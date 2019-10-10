@@ -23,6 +23,7 @@
 	<modules>
 		<module>user</module>
 		<module>discovery</module>
+		<module>gateway</module>
 	</modules>
 
 	<dependencies>
