@@ -39,7 +39,6 @@ public class Address {
     @Column(nullable = false)
     private String cep;
 
-    @NotNull(message = "The field 'client' is mandatory")
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name="client_id")
