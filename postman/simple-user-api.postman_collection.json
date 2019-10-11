@@ -1,0 +1,335 @@
+{
+	"info": {
+		"_postman_id": "cd5b0e2f-0b19-4ece-9197-670da3d9d498",
+		"name": "simple-user-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List-clients",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Perera Nobre\",\n    \"cpf\": \"655.558.833-94\",\n    \"allAddress\": [\n        {\n            \"street\": \"Rua Luiz Dionisio\",\n            \"number\": \"222\",\n            \"neighborhood\": \"Barão Geraldo\",\n            \"cep\": \"13255-956\"\n        },\n        {\n            \"street\": \"Rua Luiz Fernando\",\n            \"number\": \"333\",\n            \"neighborhood\": \"Barão Geraldo\",\n            \"complement\": \"Torre 1 Apt 47\",\n            \"cep\": \"13255-957\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients"
+					]
+				},
+				"description": "list all database clients"
+			},
+			"response": []
+		},
+		{
+			"name": "Insert-client",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John Lennon Nobre\",\n    \"cpf\": \"655.338.833-94\",\n    \"allAddress\": [\n        {\n            \"street\": \"Rua Luiz\",\n            \"number\": \"222\",\n            \"neighborhood\": \"Barão Geraldo\",\n            \"cep\": \"13255-956\"\n        },\n        {\n            \"street\": \"Rua Fernando\",\n            \"number\": \"333\",\n            \"neighborhood\": \"Barão Geraldo\",\n            \"complement\": \"Torre 1 Apt 47\",\n            \"cep\": \"13255-957\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients"
+					]
+				},
+				"description": "add new client"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete-client-error",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients/6666666",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients",
+						"6666666"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete-client",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-client",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update-client",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cpf\": \"655.558.859-94\",\n    \"name\": \"Marco Antonio Souza XX\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update-client-error",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cpf\": \"655.558.859-94\",\n    \"name\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete-client-address",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients/3/address/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients",
+						"3",
+						"address",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update-client-addres",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"street\": \"Rua Luiz Fernando\",\n    \"number\": \"555\",\n    \"neighborhood\": \"Barão Geraldo\",\n    \"complement\": \"Apt 55\",\n    \"cep\": \"13255-957\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients/3/address/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients",
+						"3",
+						"address",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update-client-address-error",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"street\": \"Rua Luiz Fernando\",\n    \"number\": \"555\",\n    \"neighborhood\": \"Barão Geraldo\",\n    \"complement\": \"Apt 55\",\n    \"cep\": \"13255-957\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/gateway/user/clients/3/address/566",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"gateway",
+						"user",
+						"clients",
+						"3",
+						"address",
+						"566"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
