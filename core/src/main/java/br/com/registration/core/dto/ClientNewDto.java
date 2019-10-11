@@ -15,13 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 public class ClientNewDto implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    private Long id;
     @NotEmpty
+    @Length(min=9, max=14)
     private String cpf;
     @NotEmpty
     @Length(min=5, max=120, message="size must be between 5 and 120")
     private String name;
     private List<AddressNewDto> allAddress = new ArrayList<>();
-
 }

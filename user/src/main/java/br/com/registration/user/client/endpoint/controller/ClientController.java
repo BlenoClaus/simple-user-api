@@ -1,6 +1,8 @@
 package br.com.registration.user.client.endpoint.controller;
 
+import br.com.registration.core.dto.AddressNewDto;
 import br.com.registration.core.dto.ClientNewDto;
+import br.com.registration.core.model.Address;
 import br.com.registration.core.model.Client;
 import br.com.registration.user.client.endpoint.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +39,12 @@ public class ClientController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping(value = "/{idClient}/address/{idAddress}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Void> delete(@PathVariable Long idClient, @PathVariable Long idAddress) {
+        clientService.delete(idClient, idAddress);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<Void> insert(@Valid @RequestBody ClientNewDto clientDto){
         Client client = clientService.fromDto(clientDto);
@@ -54,6 +62,15 @@ public class ClientController {
         Client client = clientService.fromDto(clientDto);
         client.setId(id);
         client = clientService.update(client);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{idClient}/address/{idAddress}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Void> update(@Valid @RequestBody AddressNewDto addressDto, @PathVariable Long idClient, @PathVariable Long idAddress) {
+        Client client = clientService.find(idClient);
+        Address address = new Address(addressDto);
+        address.setId(idAddress);
+        clientService.update(client, address);
         return ResponseEntity.noContent().build();
     }
 

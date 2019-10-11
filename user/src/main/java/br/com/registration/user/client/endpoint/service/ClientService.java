@@ -3,6 +3,7 @@ package br.com.registration.user.client.endpoint.service;
 import br.com.registration.core.dto.ClientNewDto;
 import br.com.registration.core.model.Address;
 import br.com.registration.core.model.Client;
+import br.com.registration.core.repository.AddressRepository;
 import br.com.registration.core.repository.ClientRepository;
 import br.com.registration.user.exceptions.ObjectNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -11,14 +12,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class ClientService {
 
-    @Autowired
-    private ClientRepository clientRepository;
+    @Autowired private ClientRepository clientRepository;
+    @Autowired private AddressRepository addressRepository;
 
     public Iterable<Client> list (Pageable pageable) {
         log.info("Listing all clients");
@@ -37,8 +39,9 @@ public class ClientService {
         clientRepository
                 .findById(id)
                 .ifPresentOrElse(client -> clientRepository.deleteById(id),
-                () -> new ObjectNotFoundException(String.format("Client not deleted: %d", id)))
-                ;
+                () -> {
+                    throw new ObjectNotFoundException(String.format("Client not deleted: %d", id));
+                });
     }
 
     public Client fromDto(ClientNewDto clientNewDto) {
@@ -66,13 +69,46 @@ public class ClientService {
 
     public Client update(Client client) {
         Client clientFound = find(client.getId());
-        updateData(clientFound, client);
-        return clientRepository.save(client);
+        updateClient(clientFound, client);
+        return clientRepository.save(clientFound);
     }
 
-    private void updateData(Client clientFound, Client client) {
+    private void updateClient(Client clientFound, Client client) {
         clientFound.setName(client.getName());
         clientFound.setCpf(client.getCpf());
-        clientFound.setAllAddress(client.getAllAddress());
+    }
+
+    public void delete(Long idClient, Long idAddress) {
+        Client client = find(idClient);
+        addressRepository.findById(idAddress)
+                .ifPresentOrElse(address -> {
+                    addressRepository.deleteById(idAddress);
+                    client.getAllAddress().remove(address);
+                },
+                () -> {
+                    throw new ObjectNotFoundException(String.format("Address not deleted: %d", idAddress));
+                });
+    }
+
+    public void update(Client client, Address address) {
+        Optional<Address> addressFound = client.getAllAddress()
+                .stream()
+                .filter(addr -> addr.getId().equals(address.getId()))
+                .findFirst();
+        addressFound.ifPresentOrElse(
+                addressSaved -> {
+                    updateAddress(addressSaved, address);
+                    addressRepository.save(addressSaved);
+                },
+                ()-> {
+                    throw new ObjectNotFoundException(String.format("Address not updated: %d", address.getId()));
+                });
+    }
+
+    private void updateAddress(Address addressSaved, Address address) {
+        addressSaved.setStreet(address.getStreet());
+        addressSaved.setNumber(address.getNumber());
+        addressSaved.setNeighborhood(address.getNeighborhood());
+        addressSaved.setComplement(address.getComplement());
     }
 }
