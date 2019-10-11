@@ -1,0 +1,23 @@
+version: '2'
+volumes:
+  dados:
+services:
+  db:
+    image: postgres
+    volumes:
+      - dados:/var/lib/postgresql/data
+      - ./scripts:/scripts
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    ports:
+      - 3300:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=userdb
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 3000:8080
