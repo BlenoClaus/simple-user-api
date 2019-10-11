@@ -34,11 +34,9 @@ public class UserApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Client client1 = new Client().builder()
 				.id(null)
-				.name("José Silva")
-				.cpf("655.558.859-94")
+				.name("Pedro Silva")
+				.cpf("655.559.859-94")
 				.build();
-
-		clientRepository.save(client1);
 
 		Address addrs1 = new Address().builder()
 				.id(null)
@@ -56,12 +54,11 @@ public class UserApplication implements CommandLineRunner {
 				.neighborhood("Barão Geraldo")
 				.build();
 
-
 		addrs1.setClient(client1);
 		addrs2.setClient(client1);
-
-		addressRepository.saveAll(Arrays.asList(addrs1, addrs2));
 		client1.setAllAddress(Arrays.asList(addrs1, addrs2));
+
+		clientRepository.save(client1);
 	}
 
 }

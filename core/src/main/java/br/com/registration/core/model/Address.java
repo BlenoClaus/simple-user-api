@@ -1,5 +1,6 @@
 package br.com.registration.core.model;
 
+import br.com.registration.core.dto.AddressNewDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -43,5 +44,13 @@ public class Address {
     @ManyToOne
     @JoinColumn(name="client_id")
     private Client client;
+
+    public Address(AddressNewDto newDto) {
+        setCep(newDto.getCep());
+        setStreet(newDto.getStreet());
+        setNumber(newDto.getNumber());
+        setNeighborhood(newDto.getNeighborhood());
+        setComplement(newDto.getComplement());
+    }
 
 }
